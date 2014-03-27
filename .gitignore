@@ -33,27 +33,27 @@ local.properties
 ## Unity
 #################
 # Ignore the contributor's local assets folder, subfolders, and files
-ProjectName/Assets/~Local/*
-ProjectName/Assets/~Local/**/*
-ProjectName/Assets/~Local.meta
+IslandsUnityProject/Assets/~Local/*
+IslandsUnityProject/Assets/~Local/**/*
+IslandsUnityProject/Assets/~Local.meta
  
 # Ignore Library files
-ProjectName/Library/*
-ProjectName/Library/**/*
+IslandsUnityProject/Library/*
+IslandsUnityProject/Library/**/*
  
 # Ignore local build files
-ProjectName/obj/*
-ProjectName/obj/**/*
-ProjectName/Temp/*
-ProjectName/Temp/**/*
+IslandsUnityProject/obj/*
+IslandsUnityProject/obj/**/*
+IslandsUnityProject/Temp/*
+IslandsUnityProject/Temp/**/*
  
 # Ignore local project files
-ProjectName/*.csproj
-ProjectName/*.pidb
-ProjectName/*.sln
-ProjectName/*.suo
-ProjectName/*.unityproj
-ProjectName/*.userprefs
+IslandsUnityProject/*.csproj
+IslandsUnityProject/*.pidb
+IslandsUnityProject/*.sln
+IslandsUnityProject/*.suo
+IslandsUnityProject/*.unityproj
+IslandsUnityProject/*.userprefs
 
 
 #################
