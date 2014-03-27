@@ -46,6 +46,8 @@ IslandsUnityProject/obj/*
 IslandsUnityProject/obj/**/*
 IslandsUnityProject/Temp/*
 IslandsUnityProject/Temp/**/*
+IslandsUnityProject/Web/*
+IslandsUnityProject/Web/**/*
  
 # Ignore local project files
 IslandsUnityProject/*.csproj
@@ -54,7 +56,8 @@ IslandsUnityProject/*.sln
 IslandsUnityProject/*.suo
 IslandsUnityProject/*.unityproj
 IslandsUnityProject/*.userprefs
-
+IslandsUnityProject/*.keystore
+IslandsUnityProject/*.apk
 
 #################
 ## Visual Studio
