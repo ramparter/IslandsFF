@@ -20,7 +20,7 @@ public class HealthScript : MonoBehaviour
     public float maxHP = 100;
     public float HP { get { return hp; } }
     public float regeneration = 5;
-    public long score;
+    public int score = 0;
 
     private float hp;
     private bool alive = true;

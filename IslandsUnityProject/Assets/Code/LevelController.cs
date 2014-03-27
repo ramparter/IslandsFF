@@ -17,20 +17,23 @@ public class LevelController : MonoBehaviour {
     private float distanceTravelled;
     private long score;
     private int level;
-    private float xp;
+    private int xp;
+    private int gemstones;
 
     private LevelState levelState = LevelState.running;
 
     GameObject player;
 
-    public float Distance { get { return distanceTravelled; } set { distanceTravelled = value; } }
-    public long Score { get { return score; } set { score = value; } }
-    public int Level { get { return level; } set { level = value; } }
-    public float XP { get { return xp; } set { xp = value; } }
+    public float Distance { get { return distanceTravelled; } }
+    public long Score { get { return score; } }
+    public int Level { get { return level; } }
+    public int XP { get { return xp; } }
+    public int Gemstones { get { return gemstones; } }
 
 	// Use this for initialization
 	void Start () {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        
         player = GameObject.FindGameObjectWithTag("Player");
 	}
 	

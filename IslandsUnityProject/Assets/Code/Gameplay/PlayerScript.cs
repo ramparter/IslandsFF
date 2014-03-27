@@ -90,7 +90,7 @@ public class PlayerScript : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        Debug.Log(movement);
+        //Debug.Log(movement);
 
         // Careful: For Mac users, ctrl + arrow is a bad idea
         shoot = Input.GetButton("Fire1");
