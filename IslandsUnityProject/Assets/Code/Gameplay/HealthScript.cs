@@ -33,6 +33,7 @@ public class HealthScript : MonoBehaviour
 
     float hitTimer = 0;
 
+    public bool Alive { get { return alive; } }
     /// <summary>
     /// Enemy or player?
     /// </summary>
@@ -62,7 +63,6 @@ public class HealthScript : MonoBehaviour
         if (hitTimer > 0)
         {
             float t = 0.5f + 0.5f * Mathf.Cos(Time.time * hitFlickFrequeny * Mathf.PI * 2);
-
             GetComponent<SpriteRenderer>().color = new Color((1 - t) + t * hitColor.r, (1 - t) + t * hitColor.g, (1 - t) + t * hitColor.b, hp == 0 ? 1 - hitTimer / hitDuration : 1);
         }
         else

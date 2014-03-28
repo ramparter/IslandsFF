@@ -64,4 +64,10 @@ public class LevelController : MonoBehaviour {
     }
 
 
+    public void UpdateValuables(Valuable valueable)
+    {
+        if (valueable.type == ValuableType.gemstone)
+            gemstones++;
+    }
+
 }

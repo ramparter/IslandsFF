@@ -8,7 +8,8 @@ public class EntitiesSpawner : MonoBehaviour {
     public float minRockX = 3;
     public float maxRockX = 6;
 
-    public Transform cloudPrefab;
+    public Transform[] clouds;
+    public Transform[] rocks;
     public Transform[] patterns;
 
     private float lastCollectX = 7;
@@ -21,7 +22,8 @@ public class EntitiesSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        SpawnPattern();
+        //SpawnPattern();
+        SpawnRocks();
         SpawnCollectables();
 	}
 
@@ -38,7 +40,8 @@ public class EntitiesSpawner : MonoBehaviour {
             float newCollectX = lastCollectX + minCloudX + Mathf.Pow(Random.value, 2) * (maxCloudX-minCloudX);
 
             float newCollectY = Random.Range(-cameraTopRight.y, cameraTopRight.y);
-            var cloudTransform = Instantiate(cloudPrefab) as Transform;
+            int i = Random.Range(0, clouds.Length - 1);
+            var cloudTransform = Instantiate(clouds[i]) as Transform;
             cloudTransform.position = new Vector2(newCollectX, newCollectY);
                // level.UpdateStatisticValue(GameStrings.StatCloudsSpawned + newCloudType, 1);
               //  level.UpdateStatisticValue(GameStrings.StatCloudsSpawned, 1);
@@ -58,6 +61,24 @@ public class EntitiesSpawner : MonoBehaviour {
             int i = Random.Range(0, patterns.Length - 1);
             var patternTransform = Instantiate(patterns[i]) as Transform;
             patternTransform.position = new Vector2(newRockX, newRockY);
+            // level.UpdateStatisticValue(GameStrings.StatCloudsSpawned + newCloudType, 1);
+            //  level.UpdateStatisticValue(GameStrings.StatCloudsSpawned, 1);
+            lastRockX = newRockX;
+
+        }
+    }
+
+    void SpawnRocks()
+    {
+        Vector2 cameraTopRight = Camera.main.ViewportToWorldPoint(Vector2.one);
+        //Debug.Log(cameraTopRight);
+        if (cameraTopRight.x > lastRockX)
+        {
+            float newRockX = lastRockX + minRockX + Mathf.Pow(Random.value, 1) * (maxRockX - minRockX);
+            float newRockY = Random.Range(-cameraTopRight.y, cameraTopRight.y) * 0.9f;
+            int i = Random.Range(0, rocks.Length - 1);
+            var rock = Instantiate(rocks[i]) as Transform;
+            rock.position = new Vector2(newRockX, newRockY);
             // level.UpdateStatisticValue(GameStrings.StatCloudsSpawned + newCloudType, 1);
             //  level.UpdateStatisticValue(GameStrings.StatCloudsSpawned, 1);
             lastRockX = newRockX;

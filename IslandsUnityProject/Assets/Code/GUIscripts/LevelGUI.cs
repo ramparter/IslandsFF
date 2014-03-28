@@ -47,7 +47,8 @@ public class LevelGUI : MonoBehaviour {
         Gu.Label(Gu.Right(lp.distanceX), Gu.Bottom(lp.distanceY), Gu.Dim(lp.distanceFontSize), string.Format("{0}yd",levelController.Distance.ToString("0.0")));
         Gu.Label(Gu.Center(lp.scoreX), Gu.Top(lp.scoreY), Gu.Dim(lp.scoreFontSize), string.Format("Score: {0}", levelController.Score.ToString("00000")));
         Gu.Label(Gu.Center(lp.levelX), Gu.Top(lp.levelY), Gu.Dim(lp.levelFontSize), string.Format("Level {0}", levelController.Level.ToString()));
-        Gu.Label(Gu.Center(lp.xpX), Gu.Top(lp.xpY), Gu.Dim(lp.xpFontSize), string.Format("{0} xp", levelController.XP.ToString()));
+        //Gu.Label(Gu.Center(lp.xpX), Gu.Top(lp.xpY), Gu.Dim(lp.xpFontSize), string.Format("{0} xp", levelController.XP.ToString()));
+        Gu.Label(Gu.Center(lp.xpX), Gu.Top(lp.xpY), Gu.Dim(lp.xpFontSize), string.Format("{0} gems", levelController.Gemstones.ToString()));
     }
 
 }

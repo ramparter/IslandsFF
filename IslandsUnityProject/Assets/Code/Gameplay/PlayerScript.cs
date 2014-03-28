@@ -150,6 +150,9 @@ public class PlayerScript : MonoBehaviour
     {
         if (collectable.GetComponent<Cloud>())
             steam += collectable.GetComponent<Cloud>().steamAmount;
+
+        if (collectable.GetComponent<Valuable>())
+            GameObject.FindObjectOfType<LevelController>().UpdateValuables(collectable.GetComponent<Valuable>());
     }
 
     void OnGUI()
