@@ -45,15 +45,9 @@ public class PlayerScript : MonoBehaviour
 
     public Vector2 Movement { get { return movement; } }
 
-    public void ResetAxis()
-    {
-        AccelReader.SetDefault();
-    }
 
     void Start()
     {
-        AccelReader.SetDefault();
-        AccelReader.Reload();
 
         speed = Vector2.zero;
         steam = 50;
@@ -140,7 +134,7 @@ public class PlayerScript : MonoBehaviour
     {
         Camera.main.transform.Translate(speed * Time.deltaTime);
 
-        rigidbody2D.velocity = mobilitySpeed + speed;
+        GetComponent<Rigidbody2D>().velocity = mobilitySpeed + speed;
 
         //rigidbody2D.AddForce(mobilitySpeed + speed);
 

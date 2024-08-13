@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Simply moves the current game object
@@ -34,11 +35,12 @@ public class MoveScript : MonoBehaviour
         movement = new Vector2(
           speed.x * direction.x,
           speed.y * direction.y);
+        Console.WriteLine(movement);
     }
 
     void FixedUpdate()
     {
         // Apply movement to the rigidbody
-        rigidbody2D.velocity = movement;
+        transform.position = new Vector3(transform.position.x + movement.x, transform.position.y + movement.y, transform.position.z);
     }
 }

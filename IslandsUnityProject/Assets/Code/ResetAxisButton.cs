@@ -21,11 +21,9 @@ public class ResetAxisButton : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().ResetAxis();
     }
 
     void OnMouseUp()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().ResetAxis();
     }
 }

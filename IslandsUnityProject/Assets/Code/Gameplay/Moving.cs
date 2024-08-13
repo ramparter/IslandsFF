@@ -22,9 +22,9 @@ public class Moving : MonoBehaviour {
     void Move()
     {
         transform.Rotate(transform.forward, rotation * Time.deltaTime);
-        if (rigidbody2D)
+        if (GetComponent<Rigidbody2D>())
         {
-            rigidbody2D.velocity = speed;
+            GetComponent<Rigidbody2D>().velocity = speed;
         }
         else
         {

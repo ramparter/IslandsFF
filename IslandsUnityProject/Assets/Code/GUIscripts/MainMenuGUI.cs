@@ -18,6 +18,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using GooglePlayGames;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class LayoutProperties
@@ -114,14 +115,14 @@ public class MainMenuGUI : MonoBehaviour {
     void Start() {
         // if this is the first time we're running, bring up the sign in flow
         if (sAutoAuthenticate) {
-            GameManager.Instance.Authenticate();
+            //GameManager.Instance.Authenticate();
             sAutoAuthenticate = false;
         }
     }
 
     void OnGUI() {
-        bool standBy = GameManager.Instance.Authenticating;
-        bool authenticated = GameManager.Instance.Authenticated;
+        bool standBy = false;
+        bool authenticated = false;
         //authenticated = true;
 
         GUI.skin = GuiSkin;
@@ -139,7 +140,7 @@ public class MainMenuGUI : MonoBehaviour {
         if (DrawPlayButton()) {
             Beep();
             this.enabled = false;
-            Application.LoadLevel("Level1");
+            SceneManager.LoadScene("Level1");
         }
 
         if (DrawSettingsButton())
@@ -162,26 +163,7 @@ public class MainMenuGUI : MonoBehaviour {
             Application.Quit();
         }
 
-        if (authenticated && DrawAchButton()) {
-            Beep();
-            GameManager.Instance.ShowAchievementsUI();
-        }
-
-        if (authenticated && DrawLbButton()) {
-            Beep();
-            GameManager.Instance.ShowLeaderboardUI();
-        }
-
-        if (!authenticated && DrawSignInButton()) {
-            Beep();
-            GameManager.Instance.Authenticate();
-        }
-
-        if (authenticated && DrawSignOutButton())
-        {
-            Beep();
-            GameManager.Instance.SignOut();
-        }
+  
 
         if (authenticated)
         {
@@ -195,7 +177,7 @@ public class MainMenuGUI : MonoBehaviour {
     void DrawPleaseWait() {
         Gu.SetColor(Color.black);
         Gu.Label(Gu.Center(0), Gu.Middle(0), Gu.Dim(layoutProperties.PleaseWaitFontSize),
-            GameManager.Instance.AuthProgressMessage);
+            "100%");
     }
 
     void DrawBuildString() {
@@ -310,7 +292,7 @@ public class MainMenuGUI : MonoBehaviour {
     }
 
     void DrawSignInBlurb(string text) {
-        bool authenticated = GameManager.Instance.Authenticated;
+        bool authenticated = false;
         float x = authenticated ? 0.0f : layoutProperties.SignInBlurbX;
 
         // draw sign in explanation text
