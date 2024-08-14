@@ -17,6 +17,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager {
     private static GameManager sInstance = new GameManager();
@@ -41,7 +42,7 @@ public class GameManager {
     }
 
     private GameManager() {
-        mProgress = GameProgress.LoadFromDisk();
+
     }
 
 
@@ -57,13 +58,12 @@ public class GameManager {
 
     public void SaveStats(long distance, int level, long score)
     {
-        mProgress.SetScore(distance, level, score);
         SaveProgress();
     }
 
     public void QuitToMenu() {
         SaveProgress();
-        Application.LoadLevel("MainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public bool HasNextLevel() {
@@ -77,9 +77,6 @@ public class GameManager {
     }
 
     public void SaveProgress() {
-        if (mProgress.Dirty) {
-            mProgress.SaveToDisk();
-        }
     }
 
 

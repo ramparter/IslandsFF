@@ -1,10 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum CollectableType
+{
+    steam = 0,
+    gemstone,
+    crystal,
+    scrapMetal,
+    gold,
+    steel,
+    stone,
+    wood
+}
+
 public class Collectable : MonoBehaviour {
 
-    public int score = 50;
-    public float speedTowardsCollector = 2;
+
+    public CollectableType collectableType = 0;
+    public int amount = 5;
+    public float shrinkScale = 1f;
+    public float speedTowardsCollector = 20;
     public float collectionDuration = 2;
 
     private bool nearCollector;
@@ -20,7 +35,7 @@ public class Collectable : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        levelController = GameObject.FindObjectOfType<LevelController>().GetComponent<LevelController>();        
+        levelController = FindAnyObjectByType<LevelController>().GetComponent<LevelController>();        
         color = GetComponent<SpriteRenderer>().color;
         
 	}
@@ -34,32 +49,15 @@ public class Collectable : MonoBehaviour {
             return;
         }
 
-        if (nearCollector)
-        {
-            collectorDirection = (collector.transform.position - transform.position).normalized;
-            transform.position += (Vector3)collectorDirection * speedTowardsCollector * Time.deltaTime;
-            collectionTime += Time.deltaTime;
-
-            scale = Mathf.Max(0, 1 - collectionTime / collectionDuration);
-
-           // GetComponent<SpriteRenderer>().color = color * scale ;
-        }
-        else
-        {
-            scale = 0.95f + 0.05f * Mathf.Cos(Time.time * Mathf.PI * 1.5f);
-        }
-
         if (collectionTime >= collectionDuration)
             OnCollect();
-
-        transform.localScale = Vector2.one * scale;
-	}
+    }
 
     void OnCollect()
     {
         isCollected = true;
         collector.GetComponent<Collector>().OnCollect(GetComponent<Collectable>());
-        if (score > 0) levelController.UpdateScore(score);
+        //if (score > 0) levelController.UpdateScore(score);
 
     }
 
@@ -72,5 +70,26 @@ public class Collectable : MonoBehaviour {
             Destroy(gameObject.GetComponent<Moving>());
         //Debug.Log("Collected " + transform.position);
         Destroy(gameObject, collectionDuration * 2);
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (nearCollector)
+        {
+            collectorDirection = (collector.transform.position - transform.position).normalized;
+            transform.position += (Vector3)collectorDirection * speedTowardsCollector * Time.fixedDeltaTime;
+            collectionTime += Time.fixedDeltaTime;
+            scale = Mathf.Lerp(1, shrinkScale, collectionTime / collectionDuration);
+
+            // GetComponent<SpriteRenderer>().color = color * scale ;
+        }
+        else
+        {
+            scale = 0.95f + 0.05f * Mathf.Cos(Time.time * Mathf.PI * 1.5f);
+        }
+
+
+        transform.localScale = Vector2.one * scale;
     }
 }

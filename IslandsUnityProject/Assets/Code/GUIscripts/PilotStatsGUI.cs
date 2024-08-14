@@ -29,7 +29,6 @@ public class PilotStatsGUI : MonoBehaviour {
 
     public void DrawPilotInfo() {
         Gu.SetColor(Color.black);
-        PilotStats stats = GameManager.Instance.Progress.CurPilotStats;
         float fontSize = SmallFormat ? GameConsts.Menu.PilotInfoFontSizeSmall :
             GameConsts.Menu.PilotInfoFontSize;
         float y = SmallFormat ? GameConsts.Menu.PilotInfoYSmallFont :
@@ -37,16 +36,10 @@ public class PilotStatsGUI : MonoBehaviour {
 
         // show summary info
         string summary;
-        if (GameManager.Instance.Progress.IsMaxLevel()) {
-            summary = string.Format(Strings.ExpStringMaxLevel,
-                stats.Level, stats.Title,
-                GameManager.Instance.Progress.IslanderExperience);
-        } else {
+
             summary = string.Format(Strings.ExpString,
-                stats.Level, stats.Title,
-                GameManager.Instance.Progress.IslanderExperience,
-                GameManager.Instance.Progress.GetExpForNextLevel());
-        }
+                0, "stats.Title",
+                0, 100);
 
         if (ShowPilotLevel) {
             Gu.Label(Gu.Left(GameConsts.Menu.PilotInfoX),
@@ -55,8 +48,8 @@ public class PilotStatsGUI : MonoBehaviour {
         }
 
         if (!SmallFormat) {
-            long total = GameManager.Instance.Progress.TotalScore;
-            int stars = GameManager.Instance.Progress.LevelsCompleted;
+            long total = 0;
+            int stars = 0;
             Gu.Label(Gu.Right(GameConsts.Menu.TotalScoreLabelX),
                 Gu.Top(GameConsts.Menu.TotalScoreLabelY),
                 Gu.Dim(GameConsts.Menu.TotalScoreLabelFontSize),

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Resources;
+using System;
 
 
 public enum LevelState
@@ -18,7 +21,7 @@ public class LevelController : MonoBehaviour {
     private long score;
     private int level;
     private int xp;
-    private int gemstones;
+    private Dictionary<CollectableType, int> resources;
 
     private LevelState levelState = LevelState.running;
 
@@ -28,14 +31,20 @@ public class LevelController : MonoBehaviour {
     public long Score { get { return score; } }
     public int Level { get { return level; } }
     public int XP { get { return xp; } }
-    public int Gemstones { get { return gemstones; } }
+    public Dictionary<CollectableType, int> Resources { get { return resources; } }
 
 	// Use this for initialization
 	void Start () {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         
         player = GameObject.FindGameObjectWithTag("Player");
-	}
+        resources = new Dictionary<CollectableType, int>();
+        foreach (CollectableType type in Enum.GetValues(typeof(CollectableType)))
+        {
+            resources[type] = 0;
+        }
+        Console.WriteLine(resources);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -64,10 +73,9 @@ public class LevelController : MonoBehaviour {
     }
 
 
-    public void UpdateValuables(Valuable valueable)
+    public void UpdateValuables(Collectable collectable)
     {
-        if (valueable.type == ValuableType.gemstone)
-            gemstones++;
+        resources[collectable.collectableType] += collectable.amount;
     }
 
 }

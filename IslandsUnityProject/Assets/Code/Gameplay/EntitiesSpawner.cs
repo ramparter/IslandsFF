@@ -12,13 +12,14 @@ public class EntitiesSpawner : MonoBehaviour {
     public Transform[] rocks;
     public Transform[] patterns;
 
-    private float lastCollectX = 7;
-    private float lastRockX = 7;
+    private float lastCollectX = 0;
+    private float lastRockX = 0;
 
 	// Use this for initialization
 	void Start () {
-
-	}
+        lastCollectX = minCloudX;
+        lastRockX = minRockX;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -40,7 +41,7 @@ public class EntitiesSpawner : MonoBehaviour {
             float newCollectX = lastCollectX + minCloudX + Mathf.Pow(Random.value, 2) * (maxCloudX-minCloudX);
 
             float newCollectY = Random.Range(-cameraTopRight.y, cameraTopRight.y);
-            int i = Random.Range(0, clouds.Length - 1);
+            int i = Random.Range(0, clouds.Length);
             var cloudTransform = Instantiate(clouds[i]) as Transform;
             cloudTransform.position = new Vector2(newCollectX, newCollectY);
                // level.UpdateStatisticValue(GameStrings.StatCloudsSpawned + newCloudType, 1);
@@ -58,7 +59,7 @@ public class EntitiesSpawner : MonoBehaviour {
         {
             float newRockX = lastRockX + minRockX + Mathf.Pow(Random.value, 1) * (maxRockX - minRockX);
             float newRockY = Random.Range(-cameraTopRight.y, cameraTopRight.y) * 0.1f;
-            int i = Random.Range(0, patterns.Length - 1);
+            int i = Random.Range(0, patterns.Length);
             var patternTransform = Instantiate(patterns[i]) as Transform;
             patternTransform.position = new Vector2(newRockX, newRockY);
             // level.UpdateStatisticValue(GameStrings.StatCloudsSpawned + newCloudType, 1);
@@ -76,7 +77,7 @@ public class EntitiesSpawner : MonoBehaviour {
         {
             float newRockX = lastRockX + minRockX + Mathf.Pow(Random.value, 1) * (maxRockX - minRockX);
             float newRockY = Random.Range(-cameraTopRight.y, cameraTopRight.y) * 0.9f;
-            int i = Random.Range(0, rocks.Length - 1);
+            int i = Random.Range(0, rocks.Length);
             var rock = Instantiate(rocks[i]) as Transform;
             rock.position = new Vector2(newRockX, newRockY);
             // level.UpdateStatisticValue(GameStrings.StatCloudsSpawned + newCloudType, 1);

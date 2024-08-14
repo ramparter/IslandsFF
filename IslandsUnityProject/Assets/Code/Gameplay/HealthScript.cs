@@ -41,7 +41,7 @@ public class HealthScript : MonoBehaviour
 
     void Start()
     {
-        levelController = GameObject.FindObjectOfType<LevelController>().GetComponent<LevelController>();
+        levelController = FindAnyObjectByType<LevelController>().GetComponent<LevelController>();
         hp = maxHP;
 
     }

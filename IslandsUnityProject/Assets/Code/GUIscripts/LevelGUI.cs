@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public class LevelGUILayoutProperties
@@ -19,7 +21,7 @@ public class LevelGUILayoutProperties
 
     public float xpX = 200;
     public float xpY = 40;
-    public float xpFontSize = 36;
+    public float xpFontSize = 18;
 
 }
 
@@ -48,7 +50,12 @@ public class LevelGUI : MonoBehaviour {
         Gu.Label(Gu.Center(lp.scoreX), Gu.Top(lp.scoreY), Gu.Dim(lp.scoreFontSize), string.Format("Score: {0}", levelController.Score.ToString("00000")));
         Gu.Label(Gu.Center(lp.levelX), Gu.Top(lp.levelY), Gu.Dim(lp.levelFontSize), string.Format("Level {0}", levelController.Level.ToString()));
         //Gu.Label(Gu.Center(lp.xpX), Gu.Top(lp.xpY), Gu.Dim(lp.xpFontSize), string.Format("{0} xp", levelController.XP.ToString()));
-        Gu.Label(Gu.Center(lp.xpX), Gu.Top(lp.xpY), Gu.Dim(lp.xpFontSize), string.Format("{0} gems", levelController.Gemstones.ToString()));
+        Gu.Label(Gu.Center(lp.xpX), Gu.Top(lp.xpY), Gu.Dim(lp.xpFontSize), string.Format("{0}", dictionaryToString(levelController.Resources)));
     }
 
+    String dictionaryToString<TEnum>(Dictionary<TEnum, int> dict)
+    {
+        return string.Join("\n", dict.Select(kv => $"{kv.Key}: {kv.Value}"));
+
+    }
 }

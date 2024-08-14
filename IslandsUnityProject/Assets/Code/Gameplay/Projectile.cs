@@ -7,6 +7,6 @@ public class Projectile : MonoBehaviour
 {
     void Start()
     {
-        Destroy(gameObject, 10);
+        Destroy(gameObject, 3);
     }
 }

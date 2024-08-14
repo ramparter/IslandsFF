@@ -44,21 +44,20 @@ public class PlayerScript : MonoBehaviour
     GUIStyle guiStyle;
 
     public Vector2 Movement { get { return movement; } }
+    public Vector2 Speed { get { return speed; } }
 
 
     void Start()
     {
 
         speed = Vector2.zero;
-        steam = 50;
+        steam = steamProperties.maxSteam;
         weapons = GetComponentsInChildren<WeaponScript>();
     }
-
     void Update()
     {
         GetInput();
 
-        UpdateMove();
         UpdateSteam();
 
         Shoot();
@@ -132,21 +131,22 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        Camera.main.transform.Translate(speed * Time.deltaTime);
+        if(transform.position.x > 0)
+            Camera.main.transform.Translate(speed * Time.deltaTime);
 
         GetComponent<Rigidbody2D>().velocity = mobilitySpeed + speed;
 
         //rigidbody2D.AddForce(mobilitySpeed + speed);
 
+        UpdateMove();
     }
 
     public void OnCollect(Collectable collectable)
     {
-        if (collectable.GetComponent<Cloud>())
-            steam += collectable.GetComponent<Cloud>().steamAmount;
+        if (collectable.collectableType == CollectableType.steam)
+            steam += collectable.amount;
 
-        if (collectable.GetComponent<Valuable>())
-            GameObject.FindObjectOfType<LevelController>().UpdateValuables(collectable.GetComponent<Valuable>());
+        FindAnyObjectByType<LevelController>().UpdateValuables(collectable);
     }
 
     void OnGUI()

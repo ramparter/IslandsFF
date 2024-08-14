@@ -63,7 +63,6 @@ public class SettingsGUI : MonoBehaviour {
 
     void OnGUI()
     {
-        axisTester.transform.position = Vector3.Lerp(axisTester.transform.position, Vector3.right * 3, mTransition.NormalizedElapsed);
 
         GUI.skin = GuiSkin;
 
@@ -86,20 +85,15 @@ public class SettingsGUI : MonoBehaviour {
         }
         else if (DrawSetDefaultButton())
         {
-            AccelReader.SetDefault();
             Beep();
         }
 
-        AccelReader.Set(axisSensX, axisSensY, deadzone);
 
     }
 
     void CloseSettings()
     {
-        AccelReader.Reload();
         gameObject.GetComponent<MainMenuGUI>().enabled = true;
-        Transform axisTester = GameObject.Find("axisTester").transform;
-        axisTester.transform.position = Vector3.right * 12;
 
         this.enabled = false;
     }

@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
  * Copyright (C) 2013 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class GameConsts {
+public class GameConsts
+{
     // Play Games plugin debug logs enabled?
     public const bool PlayGamesDebugLogsEnabled = true;
 
@@ -83,7 +84,8 @@ public class GameConsts {
     public static float[] ComboMult = { 1.0f, 1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f, 5.0f };
 
     // Tutorial settings
-    public class Tutorial {
+    public class Tutorial
+    {
         public const float PhaseDuration = 4.0f;
         public const float SteerArrowX = 100;
         public const float SteerTextX = 400;
@@ -92,7 +94,8 @@ public class GameConsts {
     }
 
     // HUD settings
-    public class Hud {
+    public class Hud
+    {
         public const float StageFontSize = 35;
         public const float StageX = 150;
         public const float StageY = 40;
@@ -122,7 +125,8 @@ public class GameConsts {
     }
 
     // Pause screen settings
-    public class PauseScreen {
+    public class PauseScreen
+    {
         public const float TitleY = -180;
         public const float TitleFontSize = 80;
         public const float ButtonFontSize = 50;
@@ -141,7 +145,8 @@ public class GameConsts {
     }
 
     // Main Menu Settings
-    public class Menu {
+    public class Menu
+    {
         public const float TransitionDuration = 0.5f;
 
         public const float TitleY = 200;
@@ -185,7 +190,7 @@ public class GameConsts {
         public const float SignInBlurbFontSize = 32;
         public static Color SignInBlurbColor = new Color(1.0f, 0.25f, 0.0f, 1.0f);
         public static Color SignedInBlurbColor = ThemeColor;
-        public const float SignInBarY = SignInButtonY ;
+        public const float SignInBarY = SignInButtonY;
         public const float SignInBarHeight = MedButtonHeight;
 
         // sign-out button
@@ -234,10 +239,11 @@ public class GameConsts {
     }
 
     // General theme color
-    public static Color ThemeColor = new Color(51/256.0f, 181/256.0f, 229/256.0f, 1.0f);
+    public static Color ThemeColor = new Color(51 / 256.0f, 181 / 256.0f, 229 / 256.0f, 1.0f);
 
     // Level progression settings
-    public class Progression {
+    public class Progression
+    {
         // Maximum level
         public const int MaxLevel = 10;
 
@@ -268,7 +274,8 @@ public class GameConsts {
     }
 
     // Achievements IDs (as given by Developer Console)
-    public class Achievements {
+    public class Achievements
+    {
         public const string NotADisaster = "CgkI0ezs4-sVEAIQAQ";
         public const string PointBlank = "CgkI0ezs4-sVEAIQAg";
         public const string FullCombo = "CgkI0ezs4-sVEAIQAw";
@@ -295,7 +302,8 @@ public class GameConsts {
     // Leaderboard ID (as given by Developer Console)
     public static string LeaderboardId = "CgkI0ezs4-sVEAIQEQ";
 
-    public class EndScreen {
+    public class EndScreen
+    {
         public const float EndTextX = -400;
         public const float EndTextY = -100;
         public const float EndTextFontSize = 45;

@@ -95,6 +95,7 @@ public class LayoutProperties
 }
 
 public class MainMenuGUI : MonoBehaviour {
+    public CoroutineController coroutineController;
     public GUISkin GuiSkin;
     public GUISkin SignInButtonGuiSkin;
     public Countdown mTransition = new Countdown(false, GameConsts.Menu.TransitionDuration);
@@ -118,6 +119,8 @@ public class MainMenuGUI : MonoBehaviour {
             //GameManager.Instance.Authenticate();
             sAutoAuthenticate = false;
         }
+
+        coroutineController.StartCoroutine(LateCall(4));
     }
 
     void OnGUI() {
@@ -340,5 +343,16 @@ public class MainMenuGUI : MonoBehaviour {
             Gu.Dim(layoutProperties.MedButtonHeight),
             Gu.Dim(layoutProperties.MedButtonFontSize),
             Strings.SignOut);
+    }
+
+    IEnumerator LateCall(float seconds)
+    {
+        if (gameObject.activeInHierarchy)
+            gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(seconds);
+
+        gameObject.SetActive(true);
+        //Do Function here...
     }
 }

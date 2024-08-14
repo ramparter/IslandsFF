@@ -21,7 +21,7 @@ public class Moving : MonoBehaviour {
 
     void Move()
     {
-        transform.Rotate(transform.forward, rotation * Time.deltaTime);
+        transform.Rotate(transform.forward, rotation * Time.fixedDeltaTime);
         if (GetComponent<Rigidbody2D>())
         {
             GetComponent<Rigidbody2D>().velocity = speed;

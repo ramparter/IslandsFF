@@ -34,8 +34,8 @@ public class MoveScript : MonoBehaviour
 
         movement = new Vector2(
           speed.x * direction.x,
-          speed.y * direction.y);
-        Console.WriteLine(movement);
+          speed.y * direction.y) * Time.fixedDeltaTime;
+        
     }
 
     void FixedUpdate()

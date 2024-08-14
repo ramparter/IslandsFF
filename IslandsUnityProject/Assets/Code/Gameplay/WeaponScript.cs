@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.CodeDom.Compiler;
+using UnityEngine;
 
 /// <summary>
 /// Launch projectile
@@ -14,20 +15,30 @@ public class WeaponScript : MonoBehaviour
     /// </summary>
     public Transform shotPrefab;
 
+    public Transform smokePrefab;
+
     /// <summary>
     /// Cooldown in seconds between two shots
     /// </summary>
     public float shootingRate = 0.25f;
+
+    public float temperatureCooldownRate = 2f;
+    public float temperatureShotIncrease = 10f;
+    public float minTemperature = 10f;
+    public float maxTemperature = 200f;
+
 
     //--------------------------------
     // 2 - Cooldown
     //--------------------------------
 
     private float shootCooldown;
+    private float temperature;
 
     void Start()
     {
         shootCooldown = 0f;
+        temperature = minTemperature;
     }
 
     void Update()
@@ -35,6 +46,10 @@ public class WeaponScript : MonoBehaviour
         if (shootCooldown > 0)
         {
             shootCooldown -= Time.deltaTime;
+        }
+        if (temperature > minTemperature)
+        {
+            temperature -= Time.deltaTime * temperatureCooldownRate;
         }
     }
 
@@ -51,26 +66,48 @@ public class WeaponScript : MonoBehaviour
         {
             shootCooldown = shootingRate;
 
-            // Create a new shot
-            var shotTransform = Instantiate(shotPrefab) as Transform;
+            Shoot(alliance);
+            ProduceSmoke();
+        }
+    }
 
-            // Assign position
-            shotTransform.position = transform.position;
-            shotTransform.rotation = transform.rotation;
+    private void Shoot(Alliance alliance)
+    {
+        var shotTransform = Instantiate(shotPrefab) as Transform;
+        // Assign position
+        shotTransform.position = transform.position;
+        shotTransform.rotation = transform.rotation;
 
-            // The is enemy property
-            DamageOnContact shot = shotTransform.gameObject.GetComponent<DamageOnContact>();
-            if (shot != null)
-            {
-                shot.alliance = alliance;
-            }
+        // The is enemy property
+        DamageOnContact shot = shotTransform.gameObject.GetComponent<DamageOnContact>();
+        if (shot != null)
+        {
+            shot.alliance = alliance;
+        }
 
-            // Make the weapon shot always towards it
-            MoveScript move = shotTransform.gameObject.GetComponent<MoveScript>();
-            if (move != null)
-            {
-                move.direction = this.transform.right; // towards in 2D space is the right of the sprite
-            }
+        // Make the weapon shot always towards it
+        MoveScript move = shotTransform.gameObject.GetComponent<MoveScript>();
+        if (move != null)
+        {
+            move.direction = this.transform.right; // towards in 2D space is the right of the sprite
+            move.speed += GetComponentInParent<Rigidbody2D>().velocity * 1f;
+        }
+    }
+    private void ProduceSmoke()
+    {
+        var smoke = Instantiate(smokePrefab) as Transform;
+        // Assign position
+        smoke.position = transform.position;
+        smoke.rotation = transform.rotation;
+
+        // The is enemy property
+ 
+        // Make the weapon shot always towards it
+        MoveScript move = smoke.gameObject.GetComponent<MoveScript>();
+        if (move != null)
+        {
+            move.direction = this.transform.right; // towards in 2D space is the right of the sprite
+            move.speed += GetComponentInParent<Rigidbody2D>().velocity * 1f;
         }
     }
 
@@ -81,7 +118,7 @@ public class WeaponScript : MonoBehaviour
     {
         get
         {
-            return shootCooldown <= 0f;
+            return shootCooldown <= 0f && temperature <= maxTemperature;
         }
     }
 }
